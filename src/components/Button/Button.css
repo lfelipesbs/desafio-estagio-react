@@ -1,0 +1,28 @@
+@import '../../styles/variables.css';
+
+.btns{
+    width: 100%;
+    padding: 16px;
+    border-radius: 20px;
+    border: 1px solid var(--cor-tres);
+}
+
+.btns:hover{
+    cursor: pointer;
+}
+
+.primary{
+    background-color: var(--cor-tres);
+}
+
+.primary:hover{
+    background-color:  #69b89b;
+}
+
+.secondary{
+    background-color: transparent;
+}
+
+.secondary:hover{
+    background-color: #3e4d47;
+}

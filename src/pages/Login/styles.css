@@ -1,0 +1,29 @@
+@import '../../styles/variables.css';
+
+.btns-init{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.container-init{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container-init h1{
+    display: flex;
+    justify-content: flex-end;
+    margin: 50px;
+    font-size: 70px;
+}
+
+.container-init-img-btns{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+}
