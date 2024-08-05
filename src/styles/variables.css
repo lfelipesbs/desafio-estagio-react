@@ -1,7 +1,11 @@
 :root{
     --cor-de-fundo: #29332F;
+    --cor-de-fundo-hover: #3e4d47;
     --cor-um: #2BCC91;
     --cor-dois: #02FFA2;
     --cor-tres: #3f9978;
+    --cor-tres-hover: #69b89b;
     --cor-quatro: #3E6657;
+    --cor-cinco: #6e2b2b;
+    --cor-cinco-hover: #834545;
 }

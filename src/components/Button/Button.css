@@ -11,18 +11,27 @@
     cursor: pointer;
 }
 
-.primary{
+.first{
     background-color: var(--cor-tres);
 }
 
-.primary:hover{
-    background-color:  #69b89b;
+.first:hover{
+    background-color: var(--cor-tres-hover);
 }
 
-.secondary{
+.second{
     background-color: transparent;
 }
 
-.secondary:hover{
-    background-color: #3e4d47;
+.second:hover{
+    background-color: var(--cor-de-fundo-hover);
+}
+
+.third{
+    border: none;
+    background-color: var(--cor-cinco);
+}
+
+.third:hover{
+    background-color: var(--cor-cinco-hover);
 }
