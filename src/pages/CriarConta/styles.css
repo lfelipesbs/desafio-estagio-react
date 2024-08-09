@@ -1,5 +1,11 @@
 @import '../../styles/variables.css';
 
+.criar-conta-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
 .container-criar-conta {
     display: flex;
     flex-direction: column;
