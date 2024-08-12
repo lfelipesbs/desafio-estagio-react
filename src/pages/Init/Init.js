@@ -1,10 +1,11 @@
 /* eslint-disable react/style-prop-object */
 import React from "react";
+
+import './styles.css';
+
 import logo from '../../assets/img/logo.png';
 import Button from "../../components/Button/Button";
 import Image from "../../components/Image/Image";
-
-import './styles.css';
 
 const Init = ({ onCreateClick, onLoginClick }) => (
     <div className="container-init">

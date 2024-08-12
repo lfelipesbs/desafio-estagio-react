@@ -1,11 +1,26 @@
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useCallback } from "react";
+import Swal from 'sweetalert2';
+
 import Login from './Login';
-import { useCallback, useState } from "react";
+
+import { LOGIN_SCHEMA } from '../../constants/schemas'
+import { login } from "../../processes/auth";
+import { getAuthState } from "../../store/authReducer";
 
 const LoginContainer = () => {
-    const [{ auth, senha }, setAll] = useState({
+    const dispatch = useDispatch();
+    const { loading } = useSelector(getAuthState)
+
+    const { setValue, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
         auth: '',
         senha: ''
+        },
+        resolver: yupResolver(LOGIN_SCHEMA)
     })
 
     const navigate = useNavigate()
@@ -15,34 +30,35 @@ const LoginContainer = () => {
     }, [navigate]);
 
     const onAuthChange = useCallback((e) => {
-        setAll(state => ({
-            ...state,
-            auth: e.target.value
-        }))
-    }, []);
+        setValue('auth', e.target.value);
+    }, [setValue]);
 
     const onPasswordChange = useCallback((e) => {
-        setAll(state => ({
-            ...state,
-            senha: e.target.value
-        }))
-    }, []);
+        setValue('senha', e.target.value);
+    }, [setValue]);
 
-    const onLoginSubmit = useCallback((e) => {
-        e.preventDefault();
-        setAll({
-            auth: '',
-            senha: ''
-        })
-    }, []);
+    const onLoginSubmit = useCallback(async values => {
+        const resp = await dispatch(login(values));
+
+        if(!resp.payload?.data) {
+            return Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: resp.error?.message
+            });
+        }
+
+        navigate('/home');
+    }, [dispatch, navigate]);
 
     return (
         <Login
             onBackClick={onBackClick}
             onAuthChange={onAuthChange}
             onPasswordChange={onPasswordChange}
-            onLoginSubmit={onLoginSubmit}
-            credentials = {{ auth, senha }}
+            onLoginSubmit={handleSubmit(onLoginSubmit)}
+            loading={loading}
+            errors={errors}
         />
     )
 }

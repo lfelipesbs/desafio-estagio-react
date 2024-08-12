@@ -1,16 +1,28 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom"
+import Swal from 'sweetalert2';
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import CriarConta from "./CriarConta";
+import { REGISTER_SCHEMA } from '../../constants/schemas'
+import { register } from "../../processes/auth";
+import { getAuthState } from "../../store/authReducer";
 
 const CriarContaContainer = () => {
-    // eslint-disable-next-line no-unused-vars
-    const [{ nome, nome_usuario, email, senha, confirmaSenha, error }, setAll] = useState({
+    const dispatch = useDispatch();
+    const { loading } = useSelector(getAuthState)
+
+    const { setValue, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
         nome: '',
         nome_usuario: '',
         email: '',
         senha: '',
-        confirmaSenha: '',
-        error: ''
+        confirmaSenha: ''
+        },
+        resolver: yupResolver(REGISTER_SCHEMA)
     })
 
     const navigate = useNavigate();
@@ -20,73 +32,37 @@ const CriarContaContainer = () => {
     }, [navigate]);
 
     const onNameChange = useCallback((e) => {
-        setAll(state => ({
-            ...state,
-            nome: e.target.value
-        }))
-    }, []);
+        setValue('nome', e.target.value)
+    }, [setValue]);
 
     const onUserNameChange = useCallback((e) => {
-        setAll(state => ({
-            ...state,
-            nome_usuario: e.target.value
-        }))
-    }, []);
+        setValue('nome_usuario', e.target.value)
+    }, [setValue]);
 
     const onEmailChange = useCallback((e) => {
-        setAll(state => ({
-            ...state,
-            email: e.target.value
-        }))
-    }, []);
+        setValue('email', e.target.value)
+    }, [setValue]);
 
     const onPasswordChange = useCallback((e) => {
-        setAll(state => ({
-            ...state,
-            senha: e.target.value
-        }))
-    }, []);
+        setValue('senha', e.target.value)
+    }, [setValue]);
 
     const onConfirmPasswordChange = useCallback((e) => {
-        setAll(state => ({
-            ...state,
-            confirmaSenha: e.target.value
-        }))
-    }, []);
+        setValue('confirmaSenha', e.target.value)
+    }, [setValue]);
 
-    const onCreateSubmit = useCallback((e) => {
-        e.preventDefault();
+    const onCreateSubmit = useCallback(async values => {
+        const resp = await dispatch(register(values));
 
-        setAll(state => ({
-            ...state,
-            error: ""
-        }))
-
-        const user = {
-            nome,
-            nome_usuario,
-            email,
-            senha
+        if(!resp.payload?.data) {
+            return Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: resp.error?.message
+            });
         }
-
-        if(senha !== confirmaSenha){
-            setAll(state => ({
-                ...state,
-                error: "As senhas precisam ser iguais"
-            }))
-            return;
-        }
-
-        console.log(user);
-
-        setAll({
-            nome: '',
-            nome_usuario: '',
-            email: '',
-            senha: '',
-            confirmaSenha: ''
-        })
-    }, [confirmaSenha, email, nome, nome_usuario, senha]);
+        navigate('/login');
+    }, [dispatch, navigate]);
 
     return(
         <CriarConta
@@ -96,8 +72,9 @@ const CriarContaContainer = () => {
             onEmailChange = {onEmailChange}
             onPasswordChange = {onPasswordChange}
             onConfirmPasswordChange = {onConfirmPasswordChange}
-            onCreateSubmit = {onCreateSubmit}
-            state = {{ nome, nome_usuario, email, senha, confirmaSenha, error }}
+            onCreateSubmit = {handleSubmit(onCreateSubmit)}
+            loading={loading}
+            errors={errors}
         />
     )
 }

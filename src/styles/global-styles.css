@@ -4,8 +4,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: var(--cor-de-fundo);
-    color: white;
 }
 
 body {
@@ -15,6 +13,8 @@ body {
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--cor-de-fundo);
+    color: white;
 }
 
 code {

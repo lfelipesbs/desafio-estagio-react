@@ -1,0 +1,28 @@
+@import '../../styles/variables.css';
+
+
+.first-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.first-form input {
+    margin: 6px 0;
+    width: 100%;
+    font-size: 22px;
+    padding: 12px;
+    outline: none;
+    background-color: var(--cor-de-fundo);
+    border: 1px solid var(--cor-quatro);
+    color: white;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.first-form input:focus{
+    border: 1px solid var(--cor-um);
+}
+
+.first-form Button{
+    margin-top: 20px;
+}

@@ -1,12 +1,28 @@
 /* eslint-disable react/style-prop-object */
 import React from "react";
-import Button from "../../components/Button/Button";
-import logo from '../../assets/img/logo.png';
-import Image from "../../components/Image/Image";
 
 import './styles.css'
 
-const Login = ({ onBackClick, onAuthChange, onPasswordChange, onLoginSubmit, credentials }) => (
+import Button from "../../components/Button/Button";
+import Form from "../../components/Form/Form";
+import logo from '../../assets/img/logo.png';
+import Image from "../../components/Image/Image";
+import Loading from "../../components/Loading/Loading";
+
+const Login = ({
+    onBackClick,
+    onAuthChange,
+    onPasswordChange,
+    onLoginSubmit,
+    loading,
+    errors
+}) => {
+    if(loading) {
+        return (
+            <Loading />
+        )
+    }
+    return (
     <>
         <div className="criar-conta-header">
             <Button id="voltar" onClick={onBackClick} style={"third"}>Voltar</Button>
@@ -15,21 +31,29 @@ const Login = ({ onBackClick, onAuthChange, onPasswordChange, onLoginSubmit, cre
         <div className="container-criar-conta">
             <h1>Entrar na conta</h1>
             <div className="container-criar-conta-form">
-                <h2>Insira suas informacoes:</h2>
-                <form className='criar-conta-form' onSubmit={onLoginSubmit}>
-                    <label>
-                        Nome de usuario ou email:
-                        <input onChange={onAuthChange} type="text" value={credentials.auth}/>
-                    </label>
-                    <label>
-                        Senha:
-                        <input onChange={onPasswordChange} type="password" value={credentials.senha}/>
-                    </label>
-                    <Button type='submit' style="first">Entrar</Button>
-                </form>
+                <h2>Insira suas informações:</h2>
+                <Form
+                    inputs={[
+                        {
+                            text: "Nome de usuário ou email:",
+                            onChange: onAuthChange,
+                            type: "text",
+                            error: errors.auth?.message
+                        },
+                        {
+                            text: "Senha:",
+                            onChange: onPasswordChange,
+                            type: "password",
+                            error: errors.senha?.message
+                        }
+                    ]}
+                    style='first-form'
+                    onSubmit={onLoginSubmit}
+                    type='Entrar'
+                />
             </div>
         </div>
     </>
-);
+)};
 
 export default Login;

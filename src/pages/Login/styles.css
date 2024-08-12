@@ -1,5 +1,11 @@
 @import '../../styles/variables.css';
 
+.criar-conta-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
 .container-criar-conta {
     display: flex;
     flex-direction: column;
@@ -29,26 +35,4 @@
     margin: 50px;
     gap: 20px;
     width: 40%;
-}
-
-.criar-conta-form{
-    display: flex;
-    flex-direction: column;
-}
-
-.criar-conta-form input {
-    margin: 6px 0;
-    width: 100%;
-    font-size: 28px;
-    padding: 8px;
-    outline: none;
-    border: 1px solid var(--cor-quatro);
-}
-
-.criar-conta-form input:focus{
-    border: 1px solid var(--cor-um);
-}
-
-.criar-conta-form Button{
-    margin-top: 20px;
 }

@@ -5,6 +5,8 @@
     padding: 16px;
     border-radius: 20px;
     border: 1px solid var(--cor-tres);
+    transition: 0.5s;
+    color: white;
 }
 
 .btns:hover{
