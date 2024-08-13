@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import Swal from 'sweetalert2';
 
 import Login from './Login';
@@ -13,12 +13,13 @@ import { getAuthState } from "../../store/authReducer";
 
 const LoginContainer = () => {
     const dispatch = useDispatch();
-    const { loading } = useSelector(getAuthState)
+    const { loading } = useSelector(getAuthState);
+    const [ showPassword, setShowPassword ] = useState(false);
 
-    const { setValue, handleSubmit, formState: { errors } } = useForm({
-    defaultValues: {
-        auth: '',
-        senha: ''
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            auth: '',
+            senha: ''
         },
         resolver: yupResolver(LOGIN_SCHEMA)
     })
@@ -29,15 +30,12 @@ const LoginContainer = () => {
         navigate('/')
     }, [navigate]);
 
-    const onAuthChange = useCallback((e) => {
-        setValue('auth', e.target.value);
-    }, [setValue]);
-
-    const onPasswordChange = useCallback((e) => {
-        setValue('senha', e.target.value);
-    }, [setValue]);
+    const toggleShowPassword = useCallback(() => {
+        setShowPassword(!showPassword);
+    }, [showPassword])
 
     const onLoginSubmit = useCallback(async values => {
+        console.log('values');
         const resp = await dispatch(login(values));
 
         if(!resp.payload?.data) {
@@ -54,11 +52,12 @@ const LoginContainer = () => {
     return (
         <Login
             onBackClick={onBackClick}
-            onAuthChange={onAuthChange}
-            onPasswordChange={onPasswordChange}
+            control={control}
             onLoginSubmit={handleSubmit(onLoginSubmit)}
             loading={loading}
             errors={errors}
+            toggleShowPassword={toggleShowPassword}
+            showPassword={showPassword}
         />
     )
 }

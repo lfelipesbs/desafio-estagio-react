@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from "react-redux";
@@ -13,8 +13,12 @@ import { getAuthState } from "../../store/authReducer";
 const CriarContaContainer = () => {
     const dispatch = useDispatch();
     const { loading } = useSelector(getAuthState)
+    const [ { showPassword, showConfirmPassword }, setAll] = useState({
+        showPassword: false,
+        showConfirmPassword: false
+    })
 
-    const { setValue, handleSubmit, formState: { errors } } = useForm({
+    const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
         nome: '',
         nome_usuario: '',
@@ -31,25 +35,19 @@ const CriarContaContainer = () => {
         navigate('/');
     }, [navigate]);
 
-    const onNameChange = useCallback((e) => {
-        setValue('nome', e.target.value)
-    }, [setValue]);
+    const toggleShowPassword = useCallback(() => {
+        setAll(state => ({
+            ...state,
+            showPassword: !showPassword
+        }))
+    }, [showPassword])
 
-    const onUserNameChange = useCallback((e) => {
-        setValue('nome_usuario', e.target.value)
-    }, [setValue]);
-
-    const onEmailChange = useCallback((e) => {
-        setValue('email', e.target.value)
-    }, [setValue]);
-
-    const onPasswordChange = useCallback((e) => {
-        setValue('senha', e.target.value)
-    }, [setValue]);
-
-    const onConfirmPasswordChange = useCallback((e) => {
-        setValue('confirmaSenha', e.target.value)
-    }, [setValue]);
+    const toggleShowConfirmPassword = useCallback(() => {
+        setAll(state => ({
+            ...state,
+            showConfirmPassword: !showConfirmPassword
+        }))
+    }, [showConfirmPassword])
 
     const onCreateSubmit = useCallback(async values => {
         const resp = await dispatch(register(values));
@@ -67,14 +65,13 @@ const CriarContaContainer = () => {
     return(
         <CriarConta
             onBackClick={onBackClick}
-            onNameChange={onNameChange}
-            onUserNameChange = {onUserNameChange}
-            onEmailChange = {onEmailChange}
-            onPasswordChange = {onPasswordChange}
-            onConfirmPasswordChange = {onConfirmPasswordChange}
             onCreateSubmit = {handleSubmit(onCreateSubmit)}
+            control={control}
             loading={loading}
             errors={errors}
+            toggleShowPassword={toggleShowPassword}
+            toggleShowConfirmPassword={toggleShowConfirmPassword}
+            state={{ showPassword, showConfirmPassword }}
         />
     )
 }
