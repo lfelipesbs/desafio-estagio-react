@@ -56,3 +56,7 @@ export const REGISTER_SCHEMA = yup.object({
         .required()
         .label('Confirmação de senha')
 })
+
+export const POST_SCHEMA = yup.object({
+    conteudo: yup.string().min(1).max(280).required('Tweet')
+})

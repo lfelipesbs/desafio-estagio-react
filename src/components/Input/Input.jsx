@@ -1,6 +1,6 @@
 import inputStyles from "./Input.styles";
 
-const Input = ({ text, onChange, type, error, checkbox }) => (
+const Input = ({ text, onChange, type, error }) => (
     <label>
         {text}
         <input onChange={onChange} type={type} />

@@ -30,12 +30,15 @@ const LoginContainer = () => {
         navigate('/')
     }, [navigate]);
 
+    const onCreateClick = useCallback(() => {
+        navigate('/criar-conta')
+    }, [navigate]);
+
     const toggleShowPassword = useCallback(() => {
         setShowPassword(!showPassword);
     }, [showPassword])
 
     const onLoginSubmit = useCallback(async values => {
-        console.log('values');
         const resp = await dispatch(login(values));
 
         if(!resp.payload?.data) {
@@ -52,6 +55,7 @@ const LoginContainer = () => {
     return (
         <Login
             onBackClick={onBackClick}
+            onCreateClick={onCreateClick}
             control={control}
             onLoginSubmit={handleSubmit(onLoginSubmit)}
             loading={loading}

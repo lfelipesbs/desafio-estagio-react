@@ -1,0 +1,117 @@
+@import '../../styles/variables.css';
+
+.home-container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    gap: 4%;
+    height: 95vh;
+}
+
+.exit-modal-btn{
+    background-color: var(--cor-cinco);
+    border: none;
+    color: rgba(255,255,255, 0.9);
+    padding: 6px 10px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.exit-modal-btn:hover{
+    cursor: pointer;
+    background-color: var(--cor-cinco-hover);
+}
+
+textarea{
+    margin-top: 2vh;
+    width: 100%;
+    height: 150px;
+    background-color: transparent;
+    border-radius: 20px;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    transition: 0.2s;
+    font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    resize: none;
+}
+
+textarea:focus{
+    outline: 1px solid var(--cor-um);
+}
+
+.user-container{
+    display: flex;
+    flex-direction: column;
+    min-width: 12%;
+    justify-content: space-between;
+    padding-left: 1vh;
+}
+
+.logo-home{
+    width: 50%;
+    align-self: flex-start;
+}
+
+.user-infos-container ul{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-left: 2vh;
+    font-size: 30px;
+    list-style-type: none;
+}
+
+#editar{
+    margin-top: 1vh;
+    font-size: 10px;
+    width: 20%;
+}
+
+.user-container Button{
+    font-size: 30px;
+}
+
+.posts-container{
+    display: flex;
+    flex-direction: column;
+    min-width: 40%;
+    gap: 4vh;
+}
+
+.pagination-buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-container{
+    display: flex;
+    flex-direction: column;
+    min-width: 22%;
+    margin-right: 10px;
+}
+
+.search-container Input {
+    margin: 6px 0;
+    width: 100%;
+    font-size: 22px;
+    padding: 12px;
+    outline: none;
+    background-color: var(--cor-de-fundo);
+    border: 1px solid var(--cor-quatro);
+    color: white;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.search-container Input:focus{
+    border: 1px solid var(--cor-um);
+}
+
+.search label{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

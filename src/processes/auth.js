@@ -19,4 +19,14 @@ export const register = createAsyncThunk('auth/criar-conta', async formData => {
     })
 
     return { data, error };
+});
+
+export const index = createAsyncThunk('auth/show-user', async params => {
+    const { data } = await client({
+        method: 'get',
+        url: '/users',
+        params: params
+    })
+
+    return data;
 })

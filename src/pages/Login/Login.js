@@ -11,6 +11,7 @@ import InputField from "../../components/InputField/InputField";
 
 const Login = ({
     onBackClick,
+    onCreateClick,
     onLoginSubmit,
     control,
     loading,
@@ -69,6 +70,16 @@ const Login = ({
 
                         <Button style="first" onClick={onLoginSubmit}>
                             Entrar
+                        </Button>
+                        <p style={{
+                            display: "flex",
+                            alignSelf: "center",
+                            marginTop: 20}}
+                        >
+                            Ainda não possui uma conta?
+                        </p>
+                        <Button style="second" onClick={onCreateClick}>
+                            Criar conta
                         </Button>
                     </div>
                 </div>

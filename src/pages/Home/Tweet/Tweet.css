@@ -1,0 +1,29 @@
+.post-container{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 40px;
+    border-bottom: 1px solid white;
+    gap: 20px;
+}
+
+.post-container h5{
+    margin-top: 10px;
+}
+
+.post-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.post-header h4 p {
+    margin-top: 1px;
+    font-size: x-small;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.post-header h6{
+    margin-right: 10px;
+    color: rgba(255, 255, 255, 0.5)
+}
